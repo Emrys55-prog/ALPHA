@@ -1,0 +1,154 @@
+[
+  {
+    "expression": "group_rank(ts_rank(fn_debt_instrument_interest_rate_stated_percentage_q, 20), subindustry)",
+    "template": "group_rank_tsrank_subind",
+    "field": "fn_debt_instrument_interest_rate_stated_percentage_q",
+    "field_type": "MATRIX",
+    "window": 20,
+    "neutralization": "SUBINDUSTRY",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "effective_tax_rate_continuing_ops_2",
+    "alpha_id": "QPYQP91K",
+    "sharpe": 1.49,
+    "fitness": 1.15,
+    "turnover": 0.017,
+    "returns": 0.0741,
+    "drawdown": 0.0428,
+    "margin": 0.008745,
+    "checks_total": 8,
+    "checks_passed": 7,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "PASS",
+        "limit": 1.25,
+        "value": 1.49
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "PASS",
+        "limit": 1.0,
+        "value": 1.15
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.017
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.017
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "PASS"
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "limit": 0.65,
+        "value": 0.74
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS",
+    "qualifies": true,
+    "on_watchlist": false,
+    "reasons": []
+  },
+  {
+    "expression": "group_rank(-ts_delta(debt_instrument_interest_rate_percent, 15), subindustry)",
+    "template": "group_rank_delta_subind",
+    "field": "debt_instrument_interest_rate_percent",
+    "field_type": "MATRIX",
+    "window": 15,
+    "neutralization": "SUBINDUSTRY",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "effective_tax_rate_continuing_ops_2",
+    "alpha_id": "P0M10YRK",
+    "sharpe": 1.42,
+    "fitness": 1.11,
+    "turnover": 0.0124,
+    "returns": 0.0758,
+    "drawdown": 0.0597,
+    "margin": 0.012234,
+    "checks_total": 8,
+    "checks_passed": 7,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "PASS",
+        "limit": 1.25,
+        "value": 1.42
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "PASS",
+        "limit": 1.0,
+        "value": 1.11
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.0124
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.0124
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "PASS"
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "limit": 0.61,
+        "value": 0.82
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS",
+    "qualifies": true,
+    "on_watchlist": false,
+    "reasons": []
+  }
+]

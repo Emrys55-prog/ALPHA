@@ -1,0 +1,78 @@
+[
+  {
+    "expression": "group_rank(ts_zscore(analyst_revision_rank_derivative, 20), industry)",
+    "hypothesis": "Analyst revision cycles exhibit information rigidity and conservative consensus updating; standardizing idiosyncratic revision ranks over a 20-day rolling window captures statistically significant positive inflection points in sell-side expectations that lead to persistent post-revision drift within peer industries.",
+    "novelty": "Standardizes dynamic revision velocity using a rolling 20-day z-score rather than static revision levels, ranked cross-sectionally within industry peers to eliminate broader macro earnings revisions.",
+    "field": "analyst_revision_rank_derivative",
+    "neutralization": "INDUSTRY",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "decay": 6,
+    "truncation": 0.08,
+    "alpha_id": "RR6qNXZj",
+    "sharpe": 0.59,
+    "fitness": 0.43,
+    "turnover": 0.0234,
+    "returns": 0.0656,
+    "drawdown": 0.2212,
+    "margin": 0.005594,
+    "checks_total": 8,
+    "checks_passed": 4,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "FAIL",
+        "limit": 1.25,
+        "value": 0.59
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "FAIL",
+        "limit": 1.0,
+        "value": 0.43
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.0234
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.0234
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "FAIL",
+        "date": "2019-06-13",
+        "limit": 0.1,
+        "value": 0.500003
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "limit": 0.26,
+        "value": 0.41
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS"
+  }
+]

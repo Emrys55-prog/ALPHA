@@ -1,0 +1,9 @@
+credentials.json
+.wq_session_cookies.pkl
+*.db
+__pycache__/
+
+*.bak
+*.pyc
+*.sqlite3
+Compress-Archive

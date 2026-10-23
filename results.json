@@ -1,0 +1,151 @@
+[
+  {
+    "expression": "rank(ts_zscore(implied_volatility_call_120, 8))",
+    "template": "rank_zscore",
+    "field": "implied_volatility_call_120",
+    "field_type": "MATRIX",
+    "window": 8,
+    "neutralization": "NONE",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "implied_volatility_call_120",
+    "alpha_id": "WjL0mn9x",
+    "sharpe": 0.76,
+    "fitness": 1.1,
+    "turnover": 0.1749,
+    "returns": 0.3664,
+    "drawdown": 0.7239,
+    "margin": 0.004189,
+    "checks_total": 8,
+    "checks_passed": 5,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "FAIL",
+        "limit": 1.25,
+        "value": 0.76
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "PASS",
+        "limit": 1.0,
+        "value": 1.1
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.1749
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.1749
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "FAIL",
+        "date": "2023-12-04",
+        "limit": 0.1,
+        "value": 1.0
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "limit": 0.33,
+        "value": 1.2
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS"
+  },
+  {
+    "expression": "rank(-ts_delta(implied_volatility_call_120, 20))",
+    "template": "rank_delta_negated",
+    "field": "implied_volatility_call_120",
+    "field_type": "MATRIX",
+    "window": 20,
+    "neutralization": "NONE",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "implied_volatility_call_120",
+    "alpha_id": "A1QmdwVe",
+    "sharpe": 0.74,
+    "fitness": 1.14,
+    "turnover": 0.1459,
+    "returns": 0.3479,
+    "drawdown": 0.7213,
+    "margin": 0.004769,
+    "checks_total": 8,
+    "checks_passed": 4,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "FAIL",
+        "limit": 1.25,
+        "value": 0.74
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "PASS",
+        "limit": 1.0,
+        "value": 1.14
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.1459
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.1459
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "FAIL"
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "FAIL",
+        "limit": 0.32,
+        "value": -0.31
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS"
+  }
+]

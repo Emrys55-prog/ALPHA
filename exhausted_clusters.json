@@ -1,0 +1,58 @@
+{
+    "analyst_estimate_revisions": {
+        "note": "Confirmed via alpha_db.py correlate: all these fields produce daily-return correlation 0.88-1.00 with each other. Best result across this whole cluster was Sharpe 1.02 (rank(ts_zscore(anl4_fs_detail_estimates_basic_qf_v4_nd_div_std, 15))), which still failed BRAIN's real submission threshold (LOW_SHARPE limit=1.25) and LOW_SUB_UNIVERSE_SHARPE. Treat as one used-up idea, not several.",
+        "fields": [
+            "anl4_qf_az_cfps_mean",
+            "anl4_fs_detail_estimates_advanced_af_nd_ebit_mean",
+            "anl4_fs_detail_estimates_basic_qf_v4_nd_div_std",
+            "anl4_fs_guidances_advanced_af_nd_cfo_maxguidance",
+            "anl4_fs_guidances_advanced_qf_nd_cff_maxguidance",
+            "anl4_fs_guidances_advanced_qf_nd_ptpr_minguidance",
+            "anl4_fs_guidances_advanced_af_nd_tbvps_maxguidance",
+            "anl4_fs_detail_estimate_1qf_v4_nd_cfi_number",
+            "anl4_fs_detail_estimates_advanced_af_nd_netdebt_high",
+            "anl4_ein",
+            "anl4_dei3lltv110_item",
+            "anl4_eaz2lltv110_prevval"
+        ]
+    },
+    "operating_income_small_cap_dependent": {
+        "note": "group_rank(-ts_delta(operating_income, N), subindustry) achieves strong headline Sharpe (1.8-1.96 across windows 3/5/8) but FAILS LOW_SUB_UNIVERSE_SHARPE every time, even after trying 3 different cap-tilting approaches (rank(cap) multiply after group_rank, weighting before group_rank, and trade_when(rank(cap)>0.5,...) restricting to only the top-cap half). The check's limit itself scales down with headline Sharpe (~0.3-0.4x), so tilting doesn't fix the ratio - this looks like a structural property of the field (operating income changes are likely more informative for smaller, less-covered companies) rather than a weighting bug. Not worth further tilting attempts on this specific field - the core idea is real but not BRAIN-submittable as constructed. A genuinely different field is needed, not more variants of this one.",
+        "fields": [
+            "operating_income"
+        ],
+        "failed_approaches": [
+            "cap_multiply (rank(cap) after outer group_rank - actively hurts, Sharpe drops to 0.2-0.3)",
+            "cap_weighted_before_rank (rank(cap) multiplied into the inner expression before group_rank - re-normalization washes it out)",
+            "cap_trade_when_top_half (trade_when(rank(cap)>0.5,...) - still fails, limit scales down with Sharpe)"
+        ]
+    },
+    "authorized_option_shares_concentration": {
+        "note": "rank(-ts_delta(authorized_option_shares_outstanding_count, 20)) with SUBINDUSTRY neutralization achieves strong Sharpe (1.5-1.7, Fitness 2.2-2.8) and even PASSES LOW_SUB_UNIVERSE_SHARPE at baseline truncation (0.08) - a genuine improvement over the operating_income cluster. But it FAILS CONCENTRATED_WEIGHT every time (~0.45-0.49 vs limit 0.10), and three different fix approaches all failed to move that number: lowering truncation (0.08->0.02/0.04, barely changed it: 0.477->0.457), ts_backfill smoothing the sparse field (destroyed Sharpe down to 0.93-1.05, no concentration improvement), and ts_decay_linear-smoothing the delta over several days (Sharpe held at 1.62 but concentration still 0.49 AND newly broke LOW_SUB_UNIVERSE_SHARPE too, which had been passing). Working hypothesis (not directly confirmed - a coverage diagnostic was skipped): this field likely has sparse data coverage (not every company reports option-share authorizations), so the real tradeable universe is a narrow subset of TOP3000, which structurally forces concentration regardless of how the delta/timing is smoothed. If revisited later, check field coverage/NaN rate first before trying more smoothing variants - that's the untested diagnostic that would confirm or rule out this hypothesis.",
+        "fields": [
+            "authorized_option_shares_outstanding_count"
+        ],
+        "failed_approaches": [
+            "lower truncation (0.08->0.02/0.04) - concentration barely moved (0.477->0.457)",
+            "ts_backfill(field, 60/120) before delta - destroyed Sharpe (1.71->0.93-1.05), concentration unchanged",
+            "ts_decay_linear(ts_delta(field,20), 5-20) smoothing - held Sharpe at 1.62 but concentration still failed AND broke LOW_SUB_UNIVERSE_SHARPE which had been passing"
+        ]
+    },
+    "live_saturated_ratios": {
+        "note": "Confirmed via audit_portfolio.py running real PnL correlation across all 16 currently-ACTIVE alphas (not just one batch). These field/ratio families each already have a live alpha and should NOT be resubmitted in any window/template variant - not because they failed, but because a correlated sibling is already active and would likely be blocked by SELF_CORRELATION or, per the competition's actual rules, risks looking like deliberate noise/gaming if stacked further. Also notable: fn_debt_instrument_face_amount_a (raw) correlated 0.70 with anl4_bvps_flag - two fields from completely different datasets - suggesting fundamental ratios broadly may share more hidden common-factor exposure than field names imply. Prefer genuinely different DATA TYPES (price/volume techniques, news/sentiment vectors) over more fundamental ratios for real diversification from here.",
+        "fields": [
+            "sales",
+            "operating_income",
+            "ebit",
+            "ebitda",
+            "fn_debt_instrument_face_amount_a",
+            "anl4_bvps_flag"
+        ],
+        "confirmed_correlated_pairs": [
+            "ebit/equity vs ebitda/assets: corr=0.84",
+            "sales/assets vs sales (raw): corr=0.93",
+            "operating_income/cap window=120 vs window=252: corr=0.84",
+            "fn_debt_instrument_face_amount_a (raw) vs anl4_bvps_flag: corr=0.70 (cross-dataset)"
+        ]
+    }
+}

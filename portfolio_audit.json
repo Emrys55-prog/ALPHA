@@ -1,0 +1,106 @@
+{
+  "info": {
+    "j2Aqo3EQ": {
+      "expression": "group_rank(ts_rank(ebit/equity, 20), subindustry)",
+      "sharpe": 2.17,
+      "fitness": 1.84
+    },
+    "KPN1AwbN": {
+      "expression": "group_rank(-ts_delta(sales/assets, 5), subindustry)",
+      "sharpe": 1.96,
+      "fitness": 1.4
+    },
+    "YPbex10o": {
+      "expression": "group_rank(ts_rank(operating_income/cap, 120), subindustry)",
+      "sharpe": 1.86,
+      "fitness": 1.46
+    },
+    "Xgb31gk1": {
+      "expression": "group_rank(ts_rank(fnd6_dltr, 5), subindustry)",
+      "sharpe": 1.34,
+      "fitness": 1.12
+    },
+    "3qXKxj7z": {
+      "expression": "group_rank(-ts_delta(fn_oth_comp_grants_weighted_avg_grant_date_fair_value_a, 5), subindustry)",
+      "sharpe": 1.72,
+      "fitness": 1.29
+    },
+    "58zK7Nm6": {
+      "expression": "group_rank(ts_rank(ebitda/assets, 20), subindustry)",
+      "sharpe": 1.93,
+      "fitness": 1.48
+    },
+    "O0NXv7vd": {
+      "expression": "group_rank(ts_rank(equity/cap, 20), subindustry)",
+      "sharpe": 1.77,
+      "fitness": 1.19
+    },
+    "KPNMeQNz": {
+      "expression": "group_rank(ts_zscore(cash_flow_from_operations/cap, 60), subindustry)",
+      "sharpe": 1.83,
+      "fitness": 1.45
+    },
+    "d5bPr55E": {
+      "expression": "group_rank(ts_rank(retained_earnings, 8), subindustry)",
+      "sharpe": 1.65,
+      "fitness": 1.17
+    },
+    "KPNZmO31": {
+      "expression": "group_rank(-ts_delta(sales, 3), subindustry)",
+      "sharpe": 1.66,
+      "fitness": 1.15
+    },
+    "levGXGXx": {
+      "expression": "group_rank(ts_rank(fn_debt_instrument_face_amount_a, 8), subindustry)",
+      "sharpe": 1.44,
+      "fitness": 1.07
+    },
+    "RRV2pzxo": {
+      "expression": "/*\r\n HYPOTHESIS: Comparatively higher liabilities may indicate that the company has higher leverage and may have higher returns in the future.\r\n \r\n IMPLEMENTATION: Compare liabilities among companies using the fundamental data field \"liabilities\".\r\n \r\n HINT TO IMPROVE THE ALPHA: Different companies have different scale of assets. Can performing a ratio analysis comparison by normalizing the liability with company assets improve Alpha performance?\r\n */\r\n \r\n liabilities/assets",
+      "sharpe": 1.57,
+      "fitness": 1.45
+    },
+    "akLAdeo1": {
+      "expression": "/*\r\n HYPOTHESIS: If the operating income of a company is currently higher than its past 1 year history, buy the company's stock and vice-versa.\r\n \r\n IMPLEMENTATION: Using ts_rank to identify current performance of the company compared to its own history, using the fundamental data field \"operating_income\".\r\n \r\n HINT TO IMPROVE THE ALPHA: Rather than comparing the value directly, can calculating a ratio that includes stock market moves, improve the signal?\r\n */\r\n \r\n ts_rank(operating_income/cap,252)",
+      "sharpe": 1.42,
+      "fitness": 1.06
+    },
+    "pwj81Jl3": {
+      "expression": "ts_mean(-returns, 5)",
+      "sharpe": 1.34,
+      "fitness": 1.04
+    },
+    "P07X6Wg7": {
+      "expression": "anl4_netprofit_flag",
+      "sharpe": 1.37,
+      "fitness": 1.69
+    },
+    "Xg7PKQjl": {
+      "expression": "anl4_bvps_flag",
+      "sharpe": 1.3,
+      "fitness": 1.19
+    }
+  },
+  "flagged": [
+    [
+      "j2Aqo3EQ",
+      "58zK7Nm6",
+      0.841404779141102
+    ],
+    [
+      "KPN1AwbN",
+      "KPNZmO31",
+      0.9266897579296463
+    ],
+    [
+      "YPbex10o",
+      "akLAdeo1",
+      0.8377680172662824
+    ],
+    [
+      "levGXGXx",
+      "Xg7PKQjl",
+      0.7036672401228996
+    ]
+  ]
+}

@@ -1,0 +1,254 @@
+[
+  {
+    "expression": "group_rank(ts_rank(future_minimum_operating_lease_payments, 5), subindustry)",
+    "template": "group_rank_tsrank_subind",
+    "field": "future_minimum_operating_lease_payments",
+    "field_type": "fundamental",
+    "window": 5,
+    "neutralization": "SUBINDUSTRY",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "analyst_recommendation_mean",
+    "alpha_id": "zqbKk63O",
+    "sharpe": 1.53,
+    "fitness": 1.3,
+    "turnover": 0.0916,
+    "returns": 0.09,
+    "drawdown": 0.0584,
+    "margin": 0.001966,
+    "checks_total": 8,
+    "checks_passed": 6,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "PASS",
+        "limit": 1.25,
+        "value": 1.53
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "PASS",
+        "limit": 1.0,
+        "value": 1.3
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.0916
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.0916
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "PASS"
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "FAIL",
+        "limit": 0.66,
+        "value": 0.58
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS",
+    "qualifies": true,
+    "on_watchlist": false,
+    "reasons": [],
+    "deep_check": {
+      "LOW_SUB_UNIVERSE_SHARPE": "FAIL",
+      "CONCENTRATED_WEIGHT": "PASS",
+      "SELF_CORRELATION": "PENDING"
+    },
+    "likely_submittable": false
+  },
+  {
+    "expression": "group_rank(-ts_delta(net_operating_lease_rent_expense, 3), subindustry)",
+    "template": "group_rank_delta_subind",
+    "field": "net_operating_lease_rent_expense",
+    "field_type": "fundamental",
+    "window": 3,
+    "neutralization": "SUBINDUSTRY",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "analyst_recommendation_mean",
+    "alpha_id": "1YZkdL5J",
+    "sharpe": 1.11,
+    "fitness": 0.85,
+    "turnover": 0.0146,
+    "returns": 0.0737,
+    "drawdown": 0.074,
+    "margin": 0.010064,
+    "checks_total": 8,
+    "checks_passed": 5,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "FAIL",
+        "limit": 1.25,
+        "value": 1.11
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "FAIL",
+        "limit": 1.0,
+        "value": 0.85
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.0146
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.0146
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "PASS"
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "limit": 0.48,
+        "value": 0.64
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS",
+    "qualifies": false,
+    "on_watchlist": true,
+    "reasons": [
+      "Sharpe 1.11 below 1.25",
+      "Fitness 0.85 below 1.0"
+    ],
+    "deep_check": {
+      "LOW_SUB_UNIVERSE_SHARPE": "PASS",
+      "CONCENTRATED_WEIGHT": "PASS",
+      "SELF_CORRELATION": "PENDING"
+    },
+    "likely_submittable": true
+  },
+  {
+    "expression": "group_rank(-ts_delta(net_operating_lease_rent_expense, 5), subindustry)",
+    "template": "group_rank_delta_subind",
+    "field": "net_operating_lease_rent_expense",
+    "field_type": "fundamental",
+    "window": 5,
+    "neutralization": "SUBINDUSTRY",
+    "universe": "TOP3000",
+    "region": "USA",
+    "delay": 1,
+    "source_cluster": "analyst_recommendation_mean",
+    "alpha_id": "3qVQewqz",
+    "sharpe": 1.11,
+    "fitness": 0.85,
+    "turnover": 0.0158,
+    "returns": 0.0731,
+    "drawdown": 0.0733,
+    "margin": 0.009282,
+    "checks_total": 8,
+    "checks_passed": 5,
+    "all_checks_passed": false,
+    "raw_checks": [
+      {
+        "name": "LOW_SHARPE",
+        "result": "FAIL",
+        "limit": 1.25,
+        "value": 1.11
+      },
+      {
+        "name": "LOW_FITNESS",
+        "result": "FAIL",
+        "limit": 1.0,
+        "value": 0.85
+      },
+      {
+        "name": "LOW_TURNOVER",
+        "result": "PASS",
+        "limit": 0.01,
+        "value": 0.0158
+      },
+      {
+        "name": "HIGH_TURNOVER",
+        "result": "PASS",
+        "limit": 0.7,
+        "value": 0.0158
+      },
+      {
+        "name": "CONCENTRATED_WEIGHT",
+        "result": "PASS"
+      },
+      {
+        "name": "LOW_SUB_UNIVERSE_SHARPE",
+        "result": "PASS",
+        "limit": 0.48,
+        "value": 0.63
+      },
+      {
+        "name": "SELF_CORRELATION",
+        "result": "PENDING"
+      },
+      {
+        "name": "MATCHES_COMPETITION",
+        "result": "PASS",
+        "competitions": [
+          {
+            "id": "challenge",
+            "name": "Challenge"
+          }
+        ]
+      }
+    ],
+    "status": "SUCCESS",
+    "qualifies": false,
+    "on_watchlist": true,
+    "reasons": [
+      "Sharpe 1.11 below 1.25",
+      "Fitness 0.85 below 1.0"
+    ],
+    "deep_check": {
+      "LOW_SUB_UNIVERSE_SHARPE": "PASS",
+      "CONCENTRATED_WEIGHT": "PASS",
+      "SELF_CORRELATION": "PENDING"
+    },
+    "likely_submittable": true
+  }
+]

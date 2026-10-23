@@ -1,0 +1,43 @@
+{
+  "started_at": "2026-10-03T12:10:54.079173+00:00",
+  "rounds": [
+    {
+      "round": 1,
+      "proposed": 1,
+      "rejected": [],
+      "simulated": [
+        {
+          "expression": "group_rank(ts_zscore(analyst_revision_rank_derivative, 20), industry)",
+          "alpha_id": "RR6qNXZj",
+          "status": "REVIEW",
+          "stats": {
+            "sharpe": 0.59,
+            "fitness": 0.43,
+            "turnover": 0.0234,
+            "drawdown": 0.2212,
+            "checks_passed": 4,
+            "checks_total": 8
+          },
+          "feedback": {
+            "qualification_reasons": [
+              "Sharpe 0.59 below 1.25",
+              "Fitness 0.43 below 1.0"
+            ],
+            "BRAIN_checks": [
+              "LOW_SHARPE:FAIL",
+              "LOW_FITNESS:FAIL",
+              "CONCENTRATED_WEIGHT:FAIL",
+              "SELF_CORRELATION:PENDING"
+            ],
+            "local_high_correlations": [],
+            "local_correlation_error": null,
+            "note": "Local screen is advisory; BRAIN SELF_CORRELATION is authoritative and may remain pending."
+          }
+        }
+      ]
+    }
+  ],
+  "submission_performed": false,
+  "finished_at": "2026-10-03T12:15:55.676603+00:00",
+  "simulation_count": 1
+}
