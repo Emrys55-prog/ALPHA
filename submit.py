@@ -107,29 +107,35 @@ def submit_alpha(session: requests.Session, alpha_id: str) -> None:
     # 60 attempts x 15s = 15 minutes, well above what's needed early on
     # but realistic once you have a couple dozen alphas active.
     max_attempts = 60
-    for attempt in range(max_attempts):
-        time.sleep(15)
-        alpha = get_alpha(session, alpha_id)
-        status = alpha.get("status")
-        print(f"  [{attempt+1}/{max_attempts}] status = {status}")
+    try:
+        for attempt in range(max_attempts):
+            time.sleep(15)
+            alpha = get_alpha(session, alpha_id)
+            status = alpha.get("status")
+            print(f"  [{attempt+1}/{max_attempts}] status = {status}")
 
-        if status == "ACTIVE":
-            print(f"\nSUCCESS — alpha {alpha_id} is now ACTIVE.")
-            return
+            if status == "ACTIVE":
+                print(f"\nSUCCESS — alpha {alpha_id} is now ACTIVE.")
+                return
 
-        checks = alpha.get("is", {}).get("checks", [])
-        self_corr = next((c for c in checks if c.get("name") == "SELF_CORRELATION"), None)
-        if self_corr and self_corr.get("result") == "FAIL":
-            print(f"\nSubmission did not go live: SELF_CORRELATION failed "
-                  f"(value={self_corr.get('value')}). This means it's too "
-                  f"correlated with an alpha you already have active.")
-            return
+            checks = alpha.get("is", {}).get("checks", [])
+            self_corr = next((c for c in checks if c.get("name") == "SELF_CORRELATION"), None)
+            if self_corr and self_corr.get("result") == "FAIL":
+                print(f"\nSubmission did not go live: SELF_CORRELATION failed "
+                      f"(value={self_corr.get('value')}). This means it's too "
+                      f"correlated with an alpha you already have active.")
+                return
 
-    print(f"\nStill not ACTIVE after ~{max_attempts * 15}s of polling. Status was last: {status}. "
-          f"This usually just means SELF_CORRELATION is still computing against your growing "
-          f"portfolio — check again in a few minutes with: python check_status.py {alpha_id} "
-          f"(read-only, won't re-submit). Or check "
-          f"https://platform.worldquantbrain.com/alpha/{alpha_id} directly.")
+        print(f"\nStill not ACTIVE after ~{max_attempts * 15}s of polling. Status was last: {status}. "
+              f"This usually just means SELF_CORRELATION is still computing against your growing "
+              f"portfolio — check again in a few minutes with: python check_status.py {alpha_id} "
+              f"(read-only, won't re-submit). Or check "
+              f"https://platform.worldquantbrain.com/alpha/{alpha_id} directly.")
+    except KeyboardInterrupt:
+        print(f"\n\nStopped waiting on {alpha_id} (Ctrl+C) — the submission itself is "
+              f"still pending on BRAIN's side, nothing was cancelled by this. Check its "
+              f"real status later with: python check_status.py {alpha_id}")
+        return
 
 
 if __name__ == "__main__":
